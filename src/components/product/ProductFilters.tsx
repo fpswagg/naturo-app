@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useState, useTransition, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Search, SlidersHorizontal, X } from 'lucide-react'
 
@@ -13,7 +13,7 @@ interface ProductFiltersProps {
   categories: Category[]
 }
 
-export function ProductFilters({ categories }: ProductFiltersProps) {
+function ProductFiltersContent({ categories }: ProductFiltersProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
@@ -148,3 +148,18 @@ export function ProductFilters({ categories }: ProductFiltersProps) {
   )
 }
 
+export function ProductFilters({ categories }: ProductFiltersProps) {
+  return (
+    <Suspense fallback={
+      <div className="space-y-4">
+        <div className="flex gap-2">
+          <div className="flex-1 input input-bordered animate-pulse" />
+          <div className="btn btn-primary animate-pulse w-32" />
+          <div className="btn btn-outline animate-pulse w-12" />
+        </div>
+      </div>
+    }>
+      <ProductFiltersContent categories={categories} />
+    </Suspense>
+  )
+}
