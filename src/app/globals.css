@@ -1,8 +1,8 @@
+/* Poppins Font Import - Must be first */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
-
-/* Poppins Font Import */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 /* Custom Theme Variables */
 :root {

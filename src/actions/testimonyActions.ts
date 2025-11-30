@@ -9,6 +9,12 @@ export async function getTestimonies() {
   })
 }
 
+export async function getTestimonyById(id: string) {
+  return prisma.testimony.findUnique({
+    where: { id }
+  })
+}
+
 export async function createTestimony(data: {
   client_name: string
   message: string
@@ -47,4 +53,3 @@ export async function deleteTestimony(id: string) {
   revalidatePath('/dashboard/testimonies')
   revalidatePath('/')
 }
-
