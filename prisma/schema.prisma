@@ -1,0 +1,65 @@
+// Prisma schema for Naturo - French product showcase website
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model Product {
+  id            String          @id @default(cuid())
+  title         String
+  description   String?
+  images        String[]
+  price         Float
+  inStock       Boolean         @default(true)
+  categoryId    String
+  category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  averageRating Float           @default(0)
+  reviews       ProductReview[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model ProductReview {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  client_name String
+  rating      Int      @db.SmallInt
+  comment     String?
+  createdAt   DateTime @default(now())
+
+  @@index([productId])
+}
+
+model Testimony {
+  id          String   @id @default(cuid())
+  client_name String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  message   String
+  contact   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model WhatsAppClick {
+  id        String   @id @default(cuid())
+  productId String?
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Poppins Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Custom Theme Variables */
+:root {
+  --color-primary: #28a745;
+  --color-primary-dark: #1e7e34;
+  --color-primary-light: #48c664;
+  --color-primary-glow: rgba(40, 167, 69, 0.4);
+  --color-accent: #20c997;
+  --color-background: #ffffff;
+  --color-surface: #f8faf9;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --color-background: #0f1419;
+  --color-surface: #1a2332;
+  --color-text: #f0f4f8;
+  --color-text-muted: #94a3b8;
+  --color-border: #2d3748;
+}
+
+@theme inline {
+  --font-sans: 'Poppins', sans-serif;
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+}
+
+/* DaisyUI Custom Theme */
+@layer base {
+  [data-theme="naturo"] {
+    --p: 142 70% 40%;
+    --pf: 142 70% 32%;
+    --pc: 0 0% 100%;
+    --s: 168 53% 44%;
+    --sf: 168 53% 36%;
+    --sc: 0 0% 100%;
+    --a: 38 92% 50%;
+    --af: 38 92% 42%;
+    --ac: 0 0% 100%;
+    --n: 220 13% 18%;
+    --nf: 220 13% 14%;
+    --nc: 220 14% 96%;
+    --b1: 0 0% 100%;
+    --b2: 140 20% 98%;
+    --b3: 140 15% 95%;
+    --bc: 220 13% 13%;
+    --in: 198 93% 60%;
+    --su: 158 64% 52%;
+    --wa: 43 96% 56%;
+    --er: 0 91% 71%;
+    --rounded-box: 1rem;
+    --rounded-btn: 0.75rem;
+    --rounded-badge: 1.5rem;
+    --animation-btn: 0.25s;
+    --animation-input: 0.2s;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
+  }
+
+  [data-theme="naturo-dark"] {
+    --p: 142 70% 45%;
+    --pf: 142 70% 38%;
+    --pc: 0 0% 100%;
+    --s: 168 53% 50%;
+    --sf: 168 53% 42%;
+    --sc: 0 0% 100%;
+    --a: 38 92% 55%;
+    --af: 38 92% 47%;
+    --ac: 0 0% 100%;
+    --n: 220 13% 90%;
+    --nf: 220 13% 85%;
+    --nc: 220 13% 13%;
+    --b1: 220 20% 10%;
+    --b2: 220 18% 13%;
+    --b3: 220 16% 16%;
+    --bc: 220 14% 96%;
+    --in: 198 93% 60%;
+    --su: 158 64% 52%;
+    --wa: 43 96% 56%;
+    --er: 0 91% 71%;
+    --rounded-box: 1rem;
+    --rounded-btn: 0.75rem;
+    --rounded-badge: 1.5rem;
+    --animation-btn: 0.25s;
+    --animation-input: 0.2s;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
+  }
+}
+
+/* Base Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glow Effects */
+.glow-green {
+  box-shadow: 0 0 20px var(--color-primary-glow), 0 0 40px var(--color-primary-glow);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 25px var(--color-primary-glow), 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Card Styles */
+.card-naturo {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card-naturo:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary-glow), 0 8px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-naturo {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(40, 167, 69, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(32, 201, 151, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(40, 167, 69, 0.05) 0%, transparent 45%);
+}
+
+/* Stock Status */
+.out-of-stock {
+  opacity: 0.6;
+  filter: grayscale(40%);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--color-primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--color-primary-glow), 0 0 40px var(--color-primary-glow);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Stagger Animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Rating Stars */
+.rating-star {
+  color: #fbbf24;
+}
+
+.rating-star-empty {
+  color: #d1d5db;
+}

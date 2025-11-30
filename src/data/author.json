@@ -1,0 +1,12 @@
+{
+  "name": "Marie Dupont",
+  "bio": "Passionnée par les produits naturels et le bien-être depuis plus de 15 ans. Je sélectionne avec soin chaque produit pour vous offrir le meilleur de la nature. Mon objectif : vous accompagner vers une vie plus saine et équilibrée.",
+  "picture": "/images/author.jpg",
+  "links": {
+    "instagram": "https://instagram.com/naturo_marie",
+    "whatsapp": "+33612345678",
+    "site": "https://naturo-marie.fr"
+  },
+  "password": "naturo2024"
+}
+
