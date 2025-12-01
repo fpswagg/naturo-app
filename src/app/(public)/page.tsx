@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles, TrendingUp, Heart } from 'lucide-react'
 import { AuthorSection } from '@/components/AuthorSection'
 import { ProductCard } from '@/components/product/ProductCard'
 import { TestimonyCard } from '@/components/TestimonyCard'
@@ -19,21 +19,32 @@ export default async function HomePage() {
 
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="py-24 lg:py-32 relative">
+          {/* Background Decoration */}
+          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-l from-accent/10 to-transparent rounded-full blur-3xl" />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Section Header */}
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+                <TrendingUp className="w-4 h-4" />
+                <span className="text-sm font-semibold uppercase tracking-wide">Nos meilleurs produits</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
                 Produits{' '}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   populaires
                 </span>
               </h2>
-              <p className="text-base-content/70 max-w-xl mx-auto">
-                Nos produits les mieux notés et les plus appréciés par nos clients
+              
+              <p className="text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto leading-relaxed">
+                Découvrez nos produits les mieux notés et les plus appréciés par nos clients
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Products Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProducts.map((product, index) => (
                 <div
                   key={product.id}
@@ -44,10 +55,14 @@ export default async function HomePage() {
               ))}
             </div>
 
-            <div className="text-center mt-10">
-              <Link href="/produits" className="btn btn-primary btn-outline gap-2 group">
-                Voir tous les produits
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            {/* View All Button */}
+            <div className="text-center mt-12">
+              <Link 
+                href="/produits" 
+                className="group inline-flex items-center gap-3 btn btn-primary btn-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <span className="font-bold">Voir tous les produits</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
               </Link>
             </div>
           </div>
@@ -56,21 +71,33 @@ export default async function HomePage() {
 
       {/* Testimonies */}
       {testimonies.length > 0 && (
-        <section className="py-20 bg-base-200">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="py-24 lg:py-32 bg-gradient-to-b from-base-100 to-base-200 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute top-20 left-0 w-96 h-96 bg-gradient-to-r from-primary/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-0 w-96 h-96 bg-gradient-to-l from-accent/10 to-transparent rounded-full blur-3xl" />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Section Header */}
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-4">
+                <Heart className="w-4 h-4 fill-current" />
+                <span className="text-sm font-semibold uppercase tracking-wide">Témoignages</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
                 Ce que disent nos{' '}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   clients
                 </span>
               </h2>
-              <p className="text-base-content/70 max-w-xl mx-auto">
-                Découvrez les témoignages de ceux qui nous font confiance
+              
+              <p className="text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto leading-relaxed">
+                Découvrez les témoignages de ceux qui nous font confiance au quotidien
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Testimonies Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonies.slice(0, 6).map((testimony, index) => (
                 <div
                   key={testimony.id}
@@ -85,20 +112,33 @@ export default async function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-24 lg:py-32 relative">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-naturo rounded-3xl p-8 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Prêt à découvrir nos produits ?
-            </h2>
-            <p className="text-white/80 max-w-xl mx-auto mb-8">
-              Contactez-moi pour en savoir plus sur nos produits naturels 
-              et trouver celui qui vous convient.
-            </p>
-            <Link href="/contact" className="btn btn-lg bg-white text-primary hover:bg-white/90 gap-2 group">
-              Me contacter
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+          <div className="relative overflow-hidden bg-gradient-to-br from-primary via-accent to-primary bg-[length:200%_200%] animate-gradient rounded-3xl shadow-2xl">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+            
+            <div className="relative z-10 p-12 md:p-20 text-center text-white">
+              <Sparkles className="w-16 h-16 mx-auto mb-6 animate-pulse" />
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                Prêt à découvrir nos produits ?
+              </h2>
+              
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Contactez-moi dès maintenant pour en savoir plus sur nos produits naturels 
+                et trouver celui qui vous convient parfaitement.
+              </p>
+              
+              <Link 
+                href="/contact" 
+                className="group inline-flex items-center gap-3 btn btn-lg bg-white text-primary hover:bg-white/95 border-0 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <span className="font-bold text-lg">Me contacter</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
