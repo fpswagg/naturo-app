@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { Leaf, Lock, Eye, EyeOff } from 'lucide-react'
+import Image from 'next/image'
+import { Lock, Eye, EyeOff } from 'lucide-react'
 import { login } from '@/lib/auth'
 
 export default function LoginPage() {
@@ -34,10 +35,17 @@ export default function LoginPage() {
       <div className="card-naturo w-full max-w-md p-8">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4 animate-pulse-glow">
-            <Leaf className="w-10 h-10 text-white" />
+          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4 animate-pulse-glow relative overflow-hidden">
+            <Image
+              src="/images/logo.svg"
+              alt="Logo"
+              width={64}
+              height={64}
+              className="object-contain"
+              unoptimized
+            />
           </div>
-          <h1 className="text-2xl font-bold">Naturo Dashboard</h1>
+          <h1 className="text-2xl font-bold">Dashboard</h1>
           <p className="text-base-content/50 text-sm">Connectez-vous pour continuer</p>
         </div>
 
@@ -96,4 +104,3 @@ export default function LoginPage() {
     </div>
   )
 }
-

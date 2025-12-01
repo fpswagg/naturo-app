@@ -6,6 +6,7 @@ import { useTransition } from 'react'
 import { Pencil, Trash2, ShoppingBag, ToggleLeft, ToggleRight } from 'lucide-react'
 import { toggleProductStock, deleteProduct } from '@/actions/productActions'
 import { Rating } from '@/components/ui/Rating'
+import { formatPriceFCFA } from '@/lib/utils'
 import type { ProductWithCategory } from '@/types'
 
 interface ProductListProps {
@@ -27,13 +28,6 @@ export function ProductList({ products }: ProductListProps) {
         await deleteProduct(id)
       })
     }
-  }
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(price)
   }
 
   if (products.length === 0) {
@@ -67,6 +61,7 @@ export function ProductList({ products }: ProductListProps) {
                     alt={product.title}
                     fill
                     className="object-cover"
+                    unoptimized={product.images[0].startsWith('http')}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -85,7 +80,7 @@ export function ProductList({ products }: ProductListProps) {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-base-content/70">
                   <span className="badge badge-ghost badge-sm">{product.category.name}</span>
-                  <span className="font-medium text-primary">{formatPrice(product.price)}</span>
+                  <span className="font-medium text-primary">{formatPriceFCFA(product.price)}</span>
                   <Rating value={product.averageRating} size="sm" />
                 </div>
               </div>
@@ -125,4 +120,3 @@ export function ProductList({ products }: ProductListProps) {
     </div>
   )
 }
-

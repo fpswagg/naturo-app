@@ -7,6 +7,7 @@ import { Rating } from '@/components/ui/Rating'
 import { ReviewForm } from '@/components/forms/ReviewForm'
 import { getProductById } from '@/actions/productActions'
 import { getAuthor } from '@/actions/authorActions'
+import { formatPriceFCFA } from '@/lib/utils'
 import { WhatsAppButton } from './WhatsAppButton'
 
 interface ProductPageProps {
@@ -16,6 +17,7 @@ interface ProductPageProps {
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { id } = await params
   const product = await getProductById(id)
+  const author = await getAuthor()
   
   if (!product) {
     return { title: 'Produit non trouvé' }
@@ -41,13 +43,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   if (!product || !product.inStock) {
     notFound()
-  }
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(price)
   }
 
   const formatDate = (date: Date) => {
@@ -82,6 +77,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   fill
                   className="object-cover"
                   priority
+                  unoptimized={product.images[0].startsWith('http')}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
@@ -103,6 +99,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       alt={`${product.title} - ${index + 1}`}
                       fill
                       className="object-cover"
+                      unoptimized={image.startsWith('http')}
                     />
                   </div>
                 ))}
@@ -124,7 +121,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </div>
 
               <p className="text-4xl font-bold text-primary">
-                {formatPrice(product.price)}
+                {formatPriceFCFA(product.price)}
               </p>
             </div>
 
@@ -197,4 +194,3 @@ export default async function ProductPage({ params }: ProductPageProps) {
     </div>
   )
 }
-

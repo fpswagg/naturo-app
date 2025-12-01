@@ -152,18 +152,18 @@ export default function EditProductPage({ params }: ProductPageProps) {
               {/* Price */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold">Prix (€) *</span>
+                  <span className="label-text font-semibold">Prix (FCFA) *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50">€</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50">FCFA</span>
                   <input
                     type="number"
                     name="price"
                     required
                     min="0"
-                    step="0.01"
+                    step="1"
                     defaultValue={product.price}
-                    className="input input-bordered input-lg pl-8"
+                    className="input input-bordered input-lg pl-16"
                   />
                 </div>
               </div>

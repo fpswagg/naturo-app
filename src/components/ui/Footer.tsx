@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Leaf, Facebook, MessageCircle } from 'lucide-react'
+import Image from 'next/image'
+import { Facebook, MessageCircle } from 'lucide-react'
 import { getAuthor } from '@/actions/authorActions'
 
 export async function Footer() {
@@ -12,15 +13,22 @@ export async function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Leaf className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center relative overflow-hidden">
+                <Image
+                  src="/images/logo.svg"
+                  alt={author.name}
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                  unoptimized
+                />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Naturo
+                {author.name}
               </span>
             </Link>
             <p className="text-base-content/70 text-sm">
-              Produits naturels sélectionnés avec soin pour votre bien-être quotidien.
+              {author.bio}
             </p>
           </div>
 
@@ -75,7 +83,7 @@ export async function Footer() {
         </div>
 
         <div className="border-t border-base-300 mt-8 pt-8 text-center text-sm text-base-content/50">
-          <p>&copy; {new Date().getFullYear()} Naturo. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} {author.name}. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

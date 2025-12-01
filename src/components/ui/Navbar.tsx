@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Leaf, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 const navLinks = [
@@ -21,12 +22,16 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center group-hover:animate-pulse-glow transition-all">
-              <Leaf className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center group-hover:animate-pulse-glow transition-all relative overflow-hidden">
+              <Image
+                src="/images/logo.svg"
+                alt="Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+                unoptimized
+              />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Naturo
-            </span>
           </Link>
 
           {/* Desktop Nav */}

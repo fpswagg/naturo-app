@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingBag } from 'lucide-react'
 import { Rating } from '@/components/ui/Rating'
+import { formatPriceFCFA } from '@/lib/utils'
 import type { ProductWithCategory } from '@/types'
 
 interface ProductCardProps {
@@ -13,13 +14,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, showStock = false, onToggleStock }: ProductCardProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(price)
-  }
-
   return (
     <div
       className={`card-naturo overflow-hidden group ${
@@ -34,6 +28,7 @@ export function ProductCard({ product, showStock = false, onToggleStock }: Produ
             alt={product.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
+            unoptimized={product.images[0].startsWith('http')}
           />
         ) : (
           <div className="w-full h-full bg-base-300 flex items-center justify-center">
@@ -68,7 +63,7 @@ export function ProductCard({ product, showStock = false, onToggleStock }: Produ
 
         <div className="flex items-center justify-between pt-2 border-t border-base-300">
           <span className="text-xl font-bold text-primary">
-            {formatPrice(product.price)}
+            {formatPriceFCFA(product.price)}
           </span>
 
           {showStock && onToggleStock ? (
@@ -88,4 +83,3 @@ export function ProductCard({ product, showStock = false, onToggleStock }: Produ
     </div>
   )
 }
-

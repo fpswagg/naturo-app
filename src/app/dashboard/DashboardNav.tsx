@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { 
   Leaf, 
@@ -50,12 +51,18 @@ export function DashboardNav() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-              <Leaf className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center relative overflow-hidden">
+              <Image
+                src="/images/logo.svg"
+                alt="Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+                unoptimized
+              />
             </div>
             <div>
-              <span className="text-lg font-bold">Naturo</span>
-              <span className="text-xs text-base-content/50 block">Dashboard</span>
+              <span className="text-lg font-bold">Dashboard</span>
             </div>
           </Link>
 
