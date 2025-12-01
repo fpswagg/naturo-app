@@ -3,9 +3,8 @@ export interface Author {
   bio: string
   picture: string
   links: {
-    instagram: string
+    facebook: string
     whatsapp: string
-    site: string
   }
   password: string
 }
@@ -64,4 +63,3 @@ export interface Message {
 }
 
 export type SortOption = 'newest' | 'oldest' | 'price-asc' | 'price-desc' | 'rating'
-

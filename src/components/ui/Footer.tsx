@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Leaf, Instagram, Globe, MessageCircle } from 'lucide-react'
+import { Leaf, Facebook, MessageCircle } from 'lucide-react'
 import { getAuthor } from '@/actions/authorActions'
 
 export async function Footer() {
@@ -50,14 +50,14 @@ export async function Footer() {
           <div>
             <h3 className="font-semibold text-base-content mb-4">Suivez-nous</h3>
             <div className="flex gap-3">
-              {author.links.instagram && (
+              {author.links.facebook && (
                 <a
-                  href={author.links.instagram}
+                  href={author.links.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-circle btn-ghost hover:bg-primary/10"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Facebook className="w-5 h-5" />
                 </a>
               )}
               {author.links.whatsapp && (
@@ -68,16 +68,6 @@ export async function Footer() {
                   className="btn btn-circle btn-ghost hover:bg-primary/10"
                 >
                   <MessageCircle className="w-5 h-5" />
-                </a>
-              )}
-              {author.links.site && (
-                <a
-                  href={author.links.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-circle btn-ghost hover:bg-primary/10"
-                >
-                  <Globe className="w-5 h-5" />
                 </a>
               )}
             </div>
@@ -91,4 +81,3 @@ export async function Footer() {
     </footer>
   )
 }
-

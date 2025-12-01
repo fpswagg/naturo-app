@@ -3,9 +3,10 @@
 import { useState, useTransition, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Upload, X, Save } from 'lucide-react'
+import { ArrowLeft, Save } from 'lucide-react'
 import { getProductById, updateProduct } from '@/actions/productActions'
 import { getCategories } from '@/actions/categoryActions'
+import { ImageUploader } from '@/components/forms/ImageUploader'
 
 interface Category {
   id: string
@@ -23,7 +24,6 @@ export default function EditProductPage({ params }: ProductPageProps) {
   const [loading, setLoading] = useState(true)
   const [categories, setCategories] = useState<Category[]>([])
   const [images, setImages] = useState<string[]>([])
-  const [newImageUrl, setNewImageUrl] = useState('')
   const [error, setError] = useState('')
   const [product, setProduct] = useState<{
     title: string
@@ -50,17 +50,6 @@ export default function EditProductPage({ params }: ProductPageProps) {
       setLoading(false)
     })
   }, [id])
-
-  const handleAddImage = () => {
-    if (newImageUrl.trim()) {
-      setImages([...images, newImageUrl.trim()])
-      setNewImageUrl('')
-    }
-  }
-
-  const handleRemoveImage = (index: number) => {
-    setImages(images.filter((_, i) => i !== index))
-  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -99,8 +88,8 @@ export default function EditProductPage({ params }: ProductPageProps) {
   if (!product) {
     return (
       <div className="text-center py-20">
-        <p className="text-base-content/70">Produit non trouvé</p>
-        <Link href="/dashboard/products" className="btn btn-primary mt-4">
+        <p className="text-base-content/70 mb-4">Produit non trouvé</p>
+        <Link href="/dashboard/products" className="btn btn-primary">
           Retour
         </Link>
       </div>
@@ -108,134 +97,115 @@ export default function EditProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <Link
-        href="/dashboard/products"
-        className="inline-flex items-center gap-2 text-base-content/70 hover:text-primary mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Retour
-      </Link>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-6">
+        <Link
+          href="/dashboard/products"
+          className="inline-flex items-center gap-2 text-base-content/70 hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Retour aux produits
+        </Link>
+      </div>
 
-      <div className="card bg-base-100 shadow-sm">
-        <div className="card-body">
-          <h1 className="card-title">Modifier le produit</h1>
+      <div className="card bg-base-100 shadow-lg">
+        <div className="card-body p-8">
+          <h1 className="text-3xl font-bold mb-2">Modifier le produit</h1>
+          <p className="text-base-content/70 mb-6">Mettez à jour les informations du produit</p>
 
           {error && (
-            <div className="alert alert-error">
+            <div className="alert alert-error mb-6">
               <span>{error}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-            {/* Title */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Titre *</span>
-              </label>
-              <input
-                type="text"
-                name="title"
-                required
-                defaultValue={product.title}
-                className="input input-bordered"
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Title */}
+              <div className="form-control md:col-span-2">
+                <label className="label">
+                  <span className="label-text font-semibold">Titre du produit *</span>
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  required
+                  defaultValue={product.title}
+                  className="input input-bordered input-lg"
+                />
+              </div>
 
-            {/* Description */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Description</span>
-              </label>
-              <textarea
-                name="description"
-                rows={4}
-                defaultValue={product.description}
-                className="textarea textarea-bordered resize-none"
-                placeholder="Description du produit (optionnelle)"
-              />
-            </div>
+              {/* Description */}
+              <div className="form-control md:col-span-2">
+                <label className="label">
+                  <span className="label-text font-semibold">Description</span>
+                </label>
+                <textarea
+                  name="description"
+                  rows={4}
+                  defaultValue={product.description}
+                  className="textarea textarea-bordered resize-none"
+                  placeholder="Description détaillée du produit (optionnelle)"
+                />
+              </div>
 
-            {/* Price */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Prix (€) *</span>
-              </label>
-              <input
-                type="number"
-                name="price"
-                required
-                min="0"
-                step="0.01"
-                defaultValue={product.price}
-                className="input input-bordered"
-              />
-            </div>
+              {/* Price */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Prix (€) *</span>
+                </label>
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50">€</span>
+                  <input
+                    type="number"
+                    name="price"
+                    required
+                    min="0"
+                    step="0.01"
+                    defaultValue={product.price}
+                    className="input input-bordered input-lg pl-8"
+                  />
+                </div>
+              </div>
 
-            {/* Category */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Catégorie *</span>
-              </label>
-              <select
-                name="categoryId"
-                defaultValue={product.categoryId}
-                className="select select-bordered"
-              >
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+              {/* Category */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Catégorie *</span>
+                </label>
+                <select
+                  name="categoryId"
+                  defaultValue={product.categoryId}
+                  className="select select-bordered select-lg w-full"
+                  required
+                >
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Images */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Images</span>
+                <span className="label-text font-semibold">Images du produit</span>
               </label>
-              
-              {images.length > 0 && (
-                <div className="grid grid-cols-4 gap-2 mb-2">
-                  {images.map((url, index) => (
-                    <div key={index} className="relative aspect-square rounded-lg overflow-hidden bg-base-200">
-                      <img src={url} alt="" className="w-full h-full object-cover" />
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveImage(index)}
-                        className="absolute top-1 right-1 btn btn-circle btn-xs btn-error"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex gap-2">
-                <input
-                  type="url"
-                  value={newImageUrl}
-                  onChange={(e) => setNewImageUrl(e.target.value)}
-                  className="input input-bordered flex-1"
-                  placeholder="URL de l'image"
-                />
-                <button
-                  type="button"
-                  onClick={handleAddImage}
-                  className="btn btn-outline"
-                >
-                  <Upload className="w-4 h-4" />
-                </button>
-              </div>
+              <ImageUploader
+                images={images}
+                onImagesChange={setImages}
+                maxImages={10}
+              />
             </div>
 
-            <div className="flex gap-3 pt-4">
+            {/* Actions */}
+            <div className="flex gap-3 pt-6 border-t border-base-300">
               <button
                 type="submit"
                 disabled={isPending}
-                className="btn btn-primary flex-1 gap-2"
+                className="btn btn-primary btn-lg flex-1 gap-2"
               >
                 {isPending ? (
                   <>
@@ -244,12 +214,12 @@ export default function EditProductPage({ params }: ProductPageProps) {
                   </>
                 ) : (
                   <>
-                    <Save className="w-4 h-4" />
-                    Enregistrer
+                    <Save className="w-5 h-5" />
+                    Enregistrer les modifications
                   </>
                 )}
               </button>
-              <Link href="/dashboard/products" className="btn btn-ghost">
+              <Link href="/dashboard/products" className="btn btn-ghost btn-lg">
                 Annuler
               </Link>
             </div>
@@ -259,4 +229,3 @@ export default function EditProductPage({ params }: ProductPageProps) {
     </div>
   )
 }
-

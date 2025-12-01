@@ -13,9 +13,8 @@ export async function updateAuthor(data: {
   bio?: string
   picture?: string
   links?: {
-    instagram?: string
+    facebook?: string
     whatsapp?: string
-    site?: string
   }
   password?: string
 }): Promise<boolean> {
@@ -30,19 +29,16 @@ export async function updateAuthor(data: {
   
   if (data.links) {
     updatedData.links = {
-      instagram: data.links.instagram ?? currentAuthor.links.instagram,
-      whatsapp: data.links.whatsapp ?? currentAuthor.links.whatsapp,
-      site: data.links.site ?? currentAuthor.links.site
+      facebook: data.links.facebook ?? currentAuthor.links.facebook,
+      whatsapp: data.links.whatsapp ?? currentAuthor.links.whatsapp
     }
   }
 
   const success = await updateAuthorFile(updatedData)
   
   if (success) {
-    revalidatePath('/dashboard/author')
     revalidatePath('/')
   }
 
   return success
 }
-

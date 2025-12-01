@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { AuthorSection } from '@/components/AuthorSection'
 import { ProductCard } from '@/components/product/ProductCard'
 import { TestimonyCard } from '@/components/TestimonyCard'
@@ -14,43 +14,7 @@ export default async function HomePage() {
 
   return (
     <div className="bg-pattern">
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6 animate-fade-in-up">
-            <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-medium">Produits 100% naturels</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up stagger-1">
-            Votre bien-être,{' '}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              naturellement
-            </span>
-          </h1>
-          
-          <p className="text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto mb-10 animate-fade-in-up stagger-2">
-            Découvrez notre sélection de produits naturels, 
-            soigneusement choisis pour améliorer votre quotidien.
-          </p>
-          
-          <div className="flex flex-wrap gap-4 justify-center animate-fade-in-up stagger-3">
-            <Link href="/produits" className="btn btn-primary btn-lg gap-2 group">
-              Voir les produits
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/contact" className="btn btn-outline btn-lg">
-              Me contacter
-            </Link>
-          </div>
-        </div>
-
-        {/* Background Decoration */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl -z-10" />
-      </section>
-
-      {/* Author Section */}
+      {/* Author Section (merged with hero) - First thing visible */}
       <AuthorSection />
 
       {/* Featured Products */}
@@ -141,4 +105,3 @@ export default async function HomePage() {
     </div>
   )
 }
-

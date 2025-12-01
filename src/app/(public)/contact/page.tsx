@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, Facebook } from 'lucide-react'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { getAuthor } from '@/actions/authorActions'
 
@@ -56,36 +56,19 @@ export default async function ContactPage() {
                   </a>
                 )}
 
-                {author.links.instagram && (
+                {author.links.facebook && (
                   <a
-                    href={author.links.instagram}
+                    href={author.links.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 p-4 rounded-xl bg-primary/10 hover:bg-primary/20 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
+                      <Facebook className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium">Instagram</p>
-                      <p className="text-base-content/70">@naturo_marie</p>
-                    </div>
-                  </a>
-                )}
-
-                {author.links.site && (
-                  <a
-                    href={author.links.site}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-xl bg-accent/10 hover:bg-accent/20 transition-colors"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Site web</p>
-                      <p className="text-base-content/70">{author.links.site}</p>
+                      <p className="font-medium">Facebook</p>
+                      <p className="text-base-content/70">Page Facebook</p>
                     </div>
                   </a>
                 )}
@@ -105,4 +88,3 @@ export default async function ContactPage() {
     </div>
   )
 }
-

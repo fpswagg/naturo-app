@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Leaf, Menu, X } from 'lucide-react'
 import { useState } from 'react'
-import { ThemeToggle } from './ThemeToggle'
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
@@ -47,18 +46,13 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="btn btn-ghost btn-circle md:hidden"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="btn btn-ghost btn-circle md:hidden"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
 
         {/* Mobile Nav */}
@@ -84,4 +78,3 @@ export function Navbar() {
     </nav>
   )
 }
-

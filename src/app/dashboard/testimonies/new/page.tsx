@@ -3,7 +3,7 @@
 import { useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Save } from 'lucide-react'
 import { createTestimony } from '@/actions/testimonyActions'
 
 export default function NewTestimonyPage() {
@@ -24,62 +24,68 @@ export default function NewTestimonyPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <Link
-        href="/dashboard/testimonies"
-        className="inline-flex items-center gap-2 text-base-content/70 hover:text-primary mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Retour
-      </Link>
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-6">
+        <Link
+          href="/dashboard/testimonies"
+          className="inline-flex items-center gap-2 text-base-content/70 hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Retour aux témoignages
+        </Link>
+      </div>
 
-      <div className="card bg-base-100 shadow-sm">
-        <div className="card-body">
-          <h1 className="card-title">Nouveau témoignage</h1>
+      <div className="card bg-base-100 shadow-lg">
+        <div className="card-body p-8">
+          <h1 className="text-3xl font-bold mb-2">Nouveau témoignage</h1>
+          <p className="text-base-content/70 mb-6">Ajoutez un nouveau témoignage client</p>
 
-          <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Nom du client *</span>
+                <span className="label-text font-semibold">Nom du client *</span>
               </label>
               <input
                 type="text"
                 name="client_name"
                 required
-                className="input input-bordered"
-                placeholder="Marie D."
+                className="input input-bordered input-lg"
+                placeholder="Ex: Marie D."
               />
             </div>
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Message *</span>
+                <span className="label-text font-semibold">Message *</span>
               </label>
               <textarea
                 name="message"
                 required
-                rows={5}
+                rows={6}
                 className="textarea textarea-bordered resize-none"
                 placeholder="Témoignage du client..."
               />
             </div>
 
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-3 pt-4 border-t border-base-300">
               <button
                 type="submit"
                 disabled={isPending}
-                className="btn btn-primary flex-1"
+                className="btn btn-primary btn-lg flex-1 gap-2"
               >
                 {isPending ? (
                   <>
                     <span className="loading loading-spinner loading-sm" />
-                    Création...
+                    Création en cours...
                   </>
                 ) : (
-                  'Créer le témoignage'
+                  <>
+                    <Save className="w-5 h-5" />
+                    Créer le témoignage
+                  </>
                 )}
               </button>
-              <Link href="/dashboard/testimonies" className="btn btn-ghost">
+              <Link href="/dashboard/testimonies" className="btn btn-ghost btn-lg">
                 Annuler
               </Link>
             </div>
@@ -89,4 +95,3 @@ export default function NewTestimonyPage() {
     </div>
   )
 }
-

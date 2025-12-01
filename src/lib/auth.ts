@@ -12,9 +12,8 @@ interface Author {
   bio: string
   picture: string
   links: {
-    instagram: string
+    facebook: string
     whatsapp: string
-    site: string
   }
   password: string
 }
@@ -66,4 +65,3 @@ export async function updateAuthor(data: Partial<Author>): Promise<boolean> {
     return false
   }
 }
-

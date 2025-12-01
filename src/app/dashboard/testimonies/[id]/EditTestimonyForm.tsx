@@ -32,38 +32,38 @@ export function EditTestimonyForm({ testimony }: EditTestimonyFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-medium">Nom du client *</span>
+          <span className="label-text font-semibold">Nom du client *</span>
         </label>
         <input
           type="text"
           name="client_name"
           required
           defaultValue={testimony.client_name}
-          className="input input-bordered"
+          className="input input-bordered input-lg"
         />
       </div>
 
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-medium">Message *</span>
+          <span className="label-text font-semibold">Message *</span>
         </label>
         <textarea
           name="message"
           required
-          rows={5}
+          rows={6}
           defaultValue={testimony.message}
           className="textarea textarea-bordered resize-none"
         />
       </div>
 
-      <div className="flex gap-3 pt-4">
+      <div className="flex gap-3 pt-4 border-t border-base-300">
         <button
           type="submit"
           disabled={isPending}
-          className="btn btn-primary flex-1 gap-2"
+          className="btn btn-primary btn-lg flex-1 gap-2"
         >
           {isPending ? (
             <>
@@ -72,17 +72,15 @@ export function EditTestimonyForm({ testimony }: EditTestimonyFormProps) {
             </>
           ) : (
             <>
-              <Save className="w-4 h-4" />
+              <Save className="w-5 h-5" />
               Enregistrer
             </>
           )}
         </button>
-        <Link href="/dashboard/testimonies" className="btn btn-ghost">
+        <Link href="/dashboard/testimonies" className="btn btn-ghost btn-lg">
           Annuler
         </Link>
       </div>
     </form>
   )
 }
-
-

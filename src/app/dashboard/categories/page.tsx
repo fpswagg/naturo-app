@@ -92,9 +92,9 @@ export default function CategoriesPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Catégories</h1>
+        <h1 className="text-3xl font-bold">Catégories</h1>
         <p className="text-base-content/70">{categories.length} catégorie{categories.length > 1 ? 's' : ''}</p>
       </div>
 
@@ -108,24 +108,24 @@ export default function CategoriesPage() {
       )}
 
       {/* Add Category */}
-      <div className="card bg-base-100 shadow-sm">
-        <div className="card-body">
-          <h2 className="font-semibold">Nouvelle catégorie</h2>
+      <div className="card bg-base-100 shadow-lg">
+        <div className="card-body p-6">
+          <h2 className="text-xl font-semibold mb-4">Nouvelle catégorie</h2>
           <div className="flex gap-2">
             <input
               type="text"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
-              className="input input-bordered flex-1"
+              className="input input-bordered input-lg flex-1"
               placeholder="Nom de la catégorie"
             />
             <button
               onClick={handleCreate}
               disabled={isPending || !newName.trim()}
-              className="btn btn-primary gap-2"
+              className="btn btn-primary btn-lg gap-2"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-5 h-5" />
               Ajouter
             </button>
           </div>
@@ -133,17 +133,18 @@ export default function CategoriesPage() {
       </div>
 
       {/* Categories List */}
-      <div className="card bg-base-100 shadow-sm">
+      <div className="card bg-base-100 shadow-lg">
         <div className="card-body p-0">
           {categories.length === 0 ? (
-            <div className="p-8 text-center">
-              <FolderTree className="w-12 h-12 text-base-content/20 mx-auto mb-4" />
-              <p className="text-base-content/70">Aucune catégorie</p>
+            <div className="p-12 text-center">
+              <FolderTree className="w-16 h-16 text-base-content/20 mx-auto mb-4" />
+              <p className="text-base-content/70 mb-2">Aucune catégorie</p>
+              <p className="text-sm text-base-content/50">Créez votre première catégorie ci-dessus</p>
             </div>
           ) : (
             <ul className="divide-y divide-base-200">
               {categories.map((cat) => (
-                <li key={cat.id} className="flex items-center gap-4 p-4">
+                <li key={cat.id} className="flex items-center gap-4 p-4 hover:bg-base-200/50 transition-colors">
                   {editingId === cat.id ? (
                     <>
                       <input
@@ -151,7 +152,7 @@ export default function CategoriesPage() {
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleUpdate(cat.id)}
-                        className="input input-bordered input-sm flex-1"
+                        className="input input-bordered flex-1"
                         autoFocus
                       />
                       <button
@@ -171,14 +172,15 @@ export default function CategoriesPage() {
                   ) : (
                     <>
                       <div className="flex-1">
-                        <span className="font-medium">{cat.name}</span>
-                        <span className="text-sm text-base-content/50 ml-2">
+                        <span className="font-semibold text-lg">{cat.name}</span>
+                        <span className="text-sm text-base-content/50 ml-3">
                           ({cat._count.products} produit{cat._count.products > 1 ? 's' : ''})
                         </span>
                       </div>
                       <button
                         onClick={() => startEdit(cat)}
                         className="btn btn-ghost btn-sm"
+                        title="Modifier"
                       >
                         <Pencil className="w-4 h-4" />
                       </button>
@@ -186,6 +188,7 @@ export default function CategoriesPage() {
                         onClick={() => handleDelete(cat.id, cat.name, cat._count.products)}
                         disabled={isPending}
                         className="btn btn-ghost btn-sm text-error"
+                        title="Supprimer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -200,4 +203,3 @@ export default function CategoriesPage() {
     </div>
   )
 }
-

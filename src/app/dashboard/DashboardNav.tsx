@@ -8,7 +8,6 @@ import {
   FolderTree, 
   MessageSquare, 
   Mail, 
-  User, 
   LogOut,
   LayoutDashboard,
   Menu,
@@ -16,7 +15,6 @@ import {
 } from 'lucide-react'
 import { useState, useTransition } from 'react'
 import { logout } from '@/lib/auth'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -24,7 +22,6 @@ const navItems = [
   { href: '/dashboard/categories', label: 'Catégories', icon: FolderTree },
   { href: '/dashboard/testimonies', label: 'Témoignages', icon: MessageSquare },
   { href: '/dashboard/messages', label: 'Messages', icon: Mail },
-  { href: '/dashboard/author', label: 'Profil', icon: User },
 ]
 
 export function DashboardNav() {
@@ -88,7 +85,6 @@ export function DashboardNav() {
             <Link href="/" className="btn btn-ghost btn-sm hidden sm:flex">
               Voir le site
             </Link>
-            <ThemeToggle />
             <button
               onClick={handleLogout}
               disabled={isPending}
@@ -141,4 +137,3 @@ export function DashboardNav() {
     </nav>
   )
 }
-
