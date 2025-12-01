@@ -36,7 +36,7 @@ export function DashboardNav() {
   const handleLogout = () => {
     startTransition(async () => {
       await logout()
-      router.push('/dashboard/login')
+      router.push('/login')
     })
   }
 

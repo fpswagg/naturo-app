@@ -21,7 +21,8 @@ export default function LoginPage() {
     startTransition(async () => {
       const success = await login(password)
       if (success) {
-        router.push('/dashboard')
+        // Use window.location for a hard redirect to clear any cached state
+        window.location.href = '/dashboard'
       } else {
         setError('Mot de passe incorrect')
       }

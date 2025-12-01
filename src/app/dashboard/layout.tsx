@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   const authenticated = await isAuthenticated()
   
   if (!authenticated) {
-    redirect('/dashboard/login')
+    redirect('/login')
   }
 
   return (
@@ -22,4 +22,3 @@ export default async function DashboardLayout({
     </div>
   )
 }
-
