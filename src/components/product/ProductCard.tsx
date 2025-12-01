@@ -14,9 +14,9 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, showStock = false, onToggleStock }: ProductCardProps) {
-  return (
+  const cardContent = (
     <div
-      className={`card-naturo overflow-hidden group ${
+      className={`card-naturo overflow-hidden group cursor-pointer ${
         !product.inStock && showStock ? 'out-of-stock' : ''
       }`}
     >
@@ -51,11 +51,9 @@ export function ProductCard({ product, showStock = false, onToggleStock }: Produ
 
       {/* Content */}
       <div className="p-4 space-y-3">
-        <Link href={`/produits/${product.id}`}>
-          <h3 className="font-semibold text-lg line-clamp-2 hover:text-primary transition-colors">
-            {product.title}
-          </h3>
-        </Link>
+        <h3 className="font-semibold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+          {product.title}
+        </h3>
 
         <div className="flex items-center justify-between">
           <Rating value={product.averageRating} size="sm" showValue />
@@ -68,18 +66,32 @@ export function ProductCard({ product, showStock = false, onToggleStock }: Produ
 
           {showStock && onToggleStock ? (
             <button
-              onClick={onToggleStock}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                onToggleStock()
+              }}
               className={`btn btn-sm ${product.inStock ? 'btn-success' : 'btn-outline'}`}
             >
               {product.inStock ? 'En stock' : 'Activer'}
             </button>
           ) : (
-            <Link href={`/produits/${product.id}`} className="btn btn-primary btn-sm">
+            <span className="btn btn-primary btn-sm pointer-events-none">
               Voir
-            </Link>
+            </span>
           )}
         </div>
       </div>
     </div>
+  )
+
+  if (showStock && onToggleStock) {
+    return cardContent
+  }
+
+  return (
+    <Link href={`/produits/${product.id}`} className="block">
+      {cardContent}
+    </Link>
   )
 }

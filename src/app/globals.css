@@ -33,6 +33,15 @@
   --color-primary-light: var(--color-primary-light);
 }
 
+/* Scrollbar Hide Utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* DaisyUI Custom Theme */
 @layer base {
   [data-theme="naturo"] {

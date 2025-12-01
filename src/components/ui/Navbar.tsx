@@ -22,7 +22,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center group-hover:animate-pulse-glow transition-all relative overflow-hidden">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:animate-pulse-glow transition-all relative overflow-hidden">
               <Image
                 src="/images/logo.svg"
                 alt="Logo"

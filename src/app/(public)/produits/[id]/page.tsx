@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, MessageCircle, ShoppingBag } from 'lucide-react'
+import { ArrowLeft, MessageCircle, ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Rating } from '@/components/ui/Rating'
 import { ReviewForm } from '@/components/forms/ReviewForm'
 import { getProductById } from '@/actions/productActions'
 import { getAuthor } from '@/actions/authorActions'
 import { formatPriceFCFA } from '@/lib/utils'
 import { WhatsAppButton } from './WhatsAppButton'
+import { ProductImageGallery } from './ProductImageGallery'
 
 interface ProductPageProps {
   params: Promise<{ id: string }>
@@ -67,45 +68,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Images */}
-          <div className="space-y-4">
-            {/* Main Image */}
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-base-200">
-              {product.images[0] ? (
-                <Image
-                  src={product.images[0]}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  unoptimized={product.images[0].startsWith('http')}
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <ShoppingBag className="w-24 h-24 text-base-content/20" />
-                </div>
-              )}
-            </div>
-
-            {/* Thumbnail Gallery */}
-            {product.images.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-2">
-                {product.images.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 border-primary"
-                  >
-                    <Image
-                      src={image}
-                      alt={`${product.title} - ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      unoptimized={image.startsWith('http')}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductImageGallery images={product.images} title={product.title} />
 
           {/* Product Info */}
           <div className="space-y-6">

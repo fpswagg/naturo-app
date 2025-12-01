@@ -13,7 +13,7 @@ export async function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center relative overflow-hidden">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center relative overflow-hidden">
                 <Image
                   src="/images/logo.svg"
                   alt={author.name}

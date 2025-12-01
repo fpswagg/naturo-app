@@ -35,7 +35,7 @@ export default function LoginPage() {
       <div className="card-naturo w-full max-w-md p-8">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4 animate-pulse-glow relative overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 animate-pulse-glow relative overflow-hidden">
             <Image
               src="/images/logo.svg"
               alt="Logo"

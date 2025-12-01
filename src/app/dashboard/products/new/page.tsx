@@ -206,7 +206,7 @@ export default function NewProductPage() {
                 ) : (
                   <>
                     <Save className="w-5 h-5" />
-                    Créer le produit
+                    Créer
                   </>
                 )}
               </button>
